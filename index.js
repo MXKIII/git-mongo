@@ -1,12 +1,14 @@
 import express from 'express'
 import mongoose from 'mongoose';
-const app = express()
 import connectDB from './client/db.js';
 import 'dotenv/config'
 import usersRouter from './routes/usersRouter.js';
 
+  const app = express()
+  
+  app.use(express.json())
+  app.use(express.urlencoded({extended: true}))
   app.use('/api',usersRouter)
-
   connectDB();
 
   const db = mongoose.connection;
