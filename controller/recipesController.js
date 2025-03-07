@@ -2,11 +2,11 @@ import recipes from "../models/recipes.js";
 
 export const getAllRecipes = async (req,res)=>{
     try {
-        const Recipes= await recipes.find().populate('author')
-        if(Recipes.length<1){
+        const recipesList= await recipes.find().populate('author')
+        if(recipesList.length<1){
             return res.status(404).json({ message: 'No recipe found' });
         }
-        return res.status(200).json(Recipes)
+        return res.status(200).json(recipesList)
     } catch (err) {
         console.log(err);
         return res.status(400).json({message:"internal server error"})
@@ -16,7 +16,7 @@ export const getAllRecipes = async (req,res)=>{
 export const getRecipeById = async (req,res)=>{
     const {id} = req.params
     try {
-       const recipeById = await recipes.findOne({author:id})
+       const recipeById = await recipes.findOne({author:id}).populate('author')
        if(!recipeById){
         return res.status(404).json({ message: 'No recipe found' });
        }

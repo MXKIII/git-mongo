@@ -2,11 +2,11 @@ import users from "../models/users.js";
 
 export const getAllUser = async (req,res)=>{
     try {
-        const Users= await users.find()
-        if(Users.length<1){
+        const usersList= await users.find()
+        if(usersList.length<1){
             return res.status(404).json({ message: 'No users found' });
         }
-        return res.status(200).json(Users)
+        return res.status(200).json(usersList)
     } catch (err) {
         console.log(err);
         return res.status(400).json({message:"internal server error"})
