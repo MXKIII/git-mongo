@@ -4,6 +4,7 @@ import connectDB from './client/db.js';
 import 'dotenv/config'
 import usersRouter from './routes/usersRouter.js';
 import recipesRouter from './routes/recipesRouter.js';
+import authRouter from './routes/authRouter.js';
 
   const app = express()
   
@@ -11,6 +12,7 @@ import recipesRouter from './routes/recipesRouter.js';
   app.use(express.urlencoded({extended: true}))
   app.use('/api',usersRouter)
   app.use('/api',recipesRouter)
+  app.use('/api',authRouter)
   connectDB();
 
   const db = mongoose.connection;
